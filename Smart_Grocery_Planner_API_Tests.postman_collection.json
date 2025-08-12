@@ -1,0 +1,225 @@
+{
+  "info": {
+    "name": "Smart Grocery Planner API Tests",
+    "description": "Test collection for Smart Grocery Planner Sprint 2 APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Budget APIs",
+      "item": [
+        {
+          "name": "Set Monthly Budget",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalBudget\": 500.00,\n  \"month\": \"June\",\n  \"year\": 2025\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/budget",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "budget"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current Budget",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/budget",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "budget"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Budget by Month/Year",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/budget/2025/June",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "budget", "2025", "June"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Expense",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 50.75\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/budget/spend",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "budget", "spend"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Budget",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/budget/2025/June",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "budget", "2025", "June"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Meal Plan APIs",
+      "item": [
+        {
+          "name": "Save Meal Plans",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"day\": \"Monday\",\n    \"meal\": \"Spaghetti Aglio e Olio\",\n    \"ingredients\": \"pasta, garlic, olive oil, chili flakes\"\n  },\n  {\n    \"day\": \"Tuesday\",\n    \"meal\": \"Greek Yogurt Parfait\",\n    \"ingredients\": \"greek yogurt, granola, honey, berries\"\n  },\n  {\n    \"day\": \"Wednesday\",\n    \"meal\": \"Grilled Cheese Sandwich\",\n    \"ingredients\": \"bread, cheese, butter\"\n  }\n]"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/meals",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "meals"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Meal Plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/meals",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "meals"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Meal Plan by Day",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/meals/Monday",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "meals", "Monday"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Meal Plan by Day",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/meals/Monday",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "meals", "Monday"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Grocery APIs (Existing)",
+      "item": [
+        {
+          "name": "Add Grocery Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Organic Bananas\",\n  \"quantity\": 6,\n  \"price\": 3.99,\n  \"category\": \"Fruits\",\n  \"expiryDate\": \"2025-06-25\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/groceries",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "groceries"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Groceries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/groceries",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "groceries"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

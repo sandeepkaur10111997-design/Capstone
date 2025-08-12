@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Meal Planner | Smart Grocery Planner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo"><img src="assests/logo.jpg" alt="Smart Grocery Logo" class="logo-img" /> Smart Grocery Planner</div>
+      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="grocery.html">Grocery</a></li>
+        <li><a href="budget.html">Budget</a></li>
+        <li><a href="mealplanner.html"class="active">Meal Planner</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="mealplanner-theme container">
+    <!-- 🍽️ Recommended Meals -->
+    <section class="form-section">
+      <h2>🍽️ Recommended Meals</h2>
+      <div class="meal-grid">
+
+        <div class="meal-card">
+          <img src="./assests/SpaghettiAglio.jpeg" alt="Spaghetti Aglio e Olio" />
+          <h3>Spaghetti Aglio e Olio</h3>
+          <p>🕒 20 mins • 🔥 380 kcal</p>
+          <p>Made with pasta, garlic, olive oil, and chili flakes.</p>
+          <div class="tags"><span>Vegetarian</span><span>Italian</span></div>
+        </div>
+
+        <div class="meal-card">
+          <img src="./assests/Greek-Yogurt-Parfait.jpg" alt="Greek Yogurt Parfait" />
+          <h3>Greek Yogurt Parfait</h3>
+          <p>🕒 5 mins • 🔥 220 kcal</p>
+          <p>Granola, yogurt, honey, and berries layered in a glass.</p>
+          <div class="tags"><span>Quick</span><span>High Protein</span></div>
+        </div>
+
+        <div class="meal-card">
+          <img src="./assests/tuna-nicoise-salad.jpg" alt="Tuna Nicoise Salad" />
+          <h3>Tuna Nicoise Salad</h3>
+          <p>🕒 30 mins • 🔥 410 kcal</p>
+          <p>Tuna, potatoes, beans, egg, and olives with vinaigrette.</p>
+          <div class="tags"><span>Low Carb</span><span>Omega-3</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⚡ Quick & Easy -->
+    <section class="form-section">
+      <h2>⚡ Quick & Easy</h2>
+      <div class="meal-grid">
+
+        <div class="meal-card">
+          <img src="./assests/grilled-cheese-sandwiche.jpg" alt="Grilled Cheese" />
+          <h3>Grilled Cheese Sandwich</h3>
+          <p>🕒 10 mins • 🔥 300 kcal</p>
+          <p>Buttered bread with melted cheddar, pan-fried to perfection.</p>
+          <div class="tags"><span>Kids Friendly</span><span>Comfort Food</span></div>
+        </div>
+
+        <div class="meal-card">
+          <img src="./assests/InstantRamen.jpg" alt="Ramen Bowl" />
+          <h3>Instant Ramen + Egg</h3>
+          <p>🕒 8 mins • 🔥 430 kcal</p>
+          <p>Spicy broth ramen with egg and green onions.</p>
+          <div class="tags"><span>Asian</span><span>Budget</span></div>
+        </div>
+
+        <div class="meal-card">
+          <img src="./assests/ultimate-scrambled-eggs.jpg" alt="Scrambled Eggs" />
+          <h3>Scrambled Eggs & Toast</h3>
+          <p>🕒 10 mins • 🔥 290 kcal</p>
+          <p>Fluffy scrambled eggs served with golden brown toast.</p>
+          <div class="tags"><span>Breakfast</span><span>Protein Rich</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🔥 Must-Try Recipes -->
+    <section class="form-section">
+      <h2>🔥 Must-Try Recipes</h2>
+      <div class="meal-grid">
+
+        <div class="meal-card">
+          <img src="./assests/MoroccanChickpeaTagine.jpg" alt="Tagine" />
+          <h3>Moroccan Chickpea Tagine</h3>
+          <p>🕒 35 mins • 🔥 420 kcal</p>
+          <p>Chickpeas and spices slow-cooked in a tomato-rich sauce.</p>
+          <div class="tags"><span>North African</span><span>Vegan</span></div>
+        </div>
+
+        <div class="meal-card">
+          <img src="./assests/ThaiGreenCurry.jpg" alt="Green Curry" />
+          <h3>Thai Green Curry</h3>
+          <p>🕒 30 mins • 🔥 540 kcal</p>
+          <p>Spicy coconut curry with chicken and Thai basil.</p>
+          <div class="tags"><span>Asian</span><span>Spicy</span></div>
+        </div>
+
+        <div class="meal-card">
+          <img src="./assests/KoreanBibimbap.jpg" alt="Bibimbap" />
+          <h3>Korean Bibimbap</h3>
+          <p>🕒 35 mins • 🔥 580 kcal</p>
+          <p>Colorful rice bowl with sautéed veggies, beef, and fried egg.</p>
+          <div class="tags"><span>Korean</span><span>Hearty</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 💰 Budget Friendly -->
+    <section class="form-section">
+      <h2>💰 Budget-Friendly Meals</h2>
+      <div class="meal-grid">
+
+        <div class="meal-card">
+          <img src="./assests/LentilSoup.jpg" alt="Lentil Soup" />
+          <h3>Lentil Soup</h3>
+          <p>🕒 30 mins • 💵 ~$0.90</p>
+          <p>Nutritious soup made from lentils, carrots, and spices.</p>
+          <div class="tags"><span>Cheap</span><span>Vegetarian</span></div>
+        </div>
+
+        <div class="meal-card">
+          <img src="./assests/MashedPotatoesVeggies.jpeg" alt="Mashed Potatoes" />
+          <h3>Mashed Potatoes & Veggies</h3>
+          <p>🕒 25 mins • 💵 ~$1.10</p>
+          <p>Whipped potatoes with butter, peas, and carrots.</p>
+          <div class="tags"><span>Comfort</span><span>Filling</span></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+  
+  <main class="container">
+  <section class="form-section">
+    <h2>Meal Planner</h2>
+    <p>This tool will help you plan meals using the groceries you’ve added.</p>
+
+    <h2>Weekly Meal Planner</h2>
+
+    <table border="1" id="mealTable">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Meal</th>
+          <th>Suggested Ingredients</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Day">Monday</td>
+          <td data-label="Meal"><input type="text" placeholder="Enter meal name" /></td>
+          <td data-label="Suggested Ingredients"><input type="text" placeholder="Enter ingredients" /></td>
+        </tr>
+        <tr>
+          <td data-label="Day">Tuesday</td>
+          <td data-label="Meal"><input type="text" placeholder="Enter meal name" /></td>
+          <td data-label="Suggested Ingredients"><input type="text" placeholder="Enter ingredients" /></td>
+        </tr>
+        <tr>
+          <td data-label="Day">Wednesday</td>
+          <td data-label="Meal"><input type="text" placeholder="Enter meal name" /></td>
+          <td data-label="Suggested Ingredients"><input type="text" placeholder="Enter ingredients" /></td>
+        </tr>
+        <tr>
+          <td data-label="Day">Thursday</td>
+          <td data-label="Meal"><input type="text" placeholder="Enter meal name" /></td>
+          <td data-label="Suggested Ingredients"><input type="text" placeholder="Enter ingredients" /></td>
+        </tr>
+        <tr>
+          <td data-label="Day">Friday</td>
+          <td data-label="Meal"><input type="text" placeholder="Enter meal name" /></td>
+          <td data-label="Suggested Ingredients"><input type="text" placeholder="Enter ingredients" /></td>
+        </tr>
+        <tr>
+          <td data-label="Day">Saturday</td>
+          <td data-label="Meal"><input type="text" placeholder="Enter meal name" /></td>
+          <td data-label="Suggested Ingredients"><input type="text" placeholder="Enter ingredients" /></td>
+        </tr>
+        <tr>
+          <td data-label="Day">Sunday</td>
+          <td data-label="Meal"><input type="text" placeholder="Enter meal name" /></td>
+          <td data-label="Suggested Ingredients"><input type="text" placeholder="Enter ingredients" /></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br />
+    <button type="submit" class="submit-btn" onclick="saveMeals()">Save Plan</button>
+  </section>
+
+  <hr />
+  <h3>Saved Meal Plans</h3>
+  <div id="savedMeals"></div>
+</main>
+
+  <script>
+  function toggleMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("show");
+    }
+
+  // Load existing meals into the form when page loads
+  function loadMealsIntoForm() {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const rows = document.querySelectorAll("#mealTable tbody tr");
+
+    // First, clear all existing values
+    rows.forEach(row => {
+      row.cells[1].querySelector("input").value = "";
+      row.cells[2].querySelector("input").value = "";
+    });
+
+    // Fetch all meals and populate the form
+    fetch("http://localhost:5000/api/meals")
+      .then(res => res.json())
+      .then(data => {
+        data.forEach(meal => {
+          const dayIndex = days.indexOf(meal.day);
+          if (dayIndex !== -1 && rows[dayIndex]) {
+            const row = rows[dayIndex];
+            row.cells[1].querySelector("input").value = meal.meal || "";
+            row.cells[2].querySelector("input").value = meal.ingredients || "";
+          }
+        });
+      })
+      .catch(err => {
+        console.error("Error loading existing meals:", err);
+      });
+  }
+  function saveMeals() {
+    const rows = document.querySelectorAll("#mealTable tbody tr");
+    const meals = [];
+
+    rows.forEach(row => {
+      const day = row.cells[0].innerText.trim();
+      const meal = row.cells[1].querySelector("input").value.trim();
+      const ingredients = row.cells[2].querySelector("input").value.trim();
+
+      // Only add meals that have both meal name and ingredients
+      if (meal && ingredients) {
+        meals.push({ day, meal, ingredients });
+      }
+    });
+
+    if (meals.length === 0) {
+      alert("Please enter at least one meal plan.");
+      return;
+    }
+
+    // Disable the button to prevent multiple submissions
+    const saveButton = document.querySelector('button[onclick="saveMeals()"]');
+    saveButton.disabled = true;
+    saveButton.textContent = "Saving...";
+
+    fetch("http://localhost:5000/api/meals", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(meals)
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert("Meal plan saved successfully!");
+      loadSavedMeals(); // Refresh the saved meals display
+      loadMealsIntoForm(); // Refresh the form to show latest data
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Failed to save meal plan.");
+    })
+    .finally(() => {
+      // Re-enable the button
+      saveButton.disabled = false;
+      saveButton.textContent = "Save Plan";
+    });
+  }
+
+  // Fetch and display saved meal plans
+  function loadSavedMeals() {
+    fetch("http://localhost:5000/api/meals")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("savedMeals");
+        container.innerHTML = "";
+
+        if (data.length === 0) {
+          container.innerHTML = "<p>No saved meals found.</p>";
+          return;
+        }
+
+        data.forEach(meal => {
+          const block = document.createElement("div");
+          block.className = "meal-block";
+          block.innerHTML = `
+            <strong>${meal.day}</strong>: ${meal.meal}  
+            <em>(${meal.ingredients})</em><br>
+          `;
+          container.appendChild(block);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("savedMeals").innerHTML = "Error loading saved meals.";
+      });
+  }
+
+  // Load both form data and saved meals display when page loads
+  window.onload = function() {
+    loadMealsIntoForm();
+    loadSavedMeals();
+  };
+</script>
+
+  <footer class="footer">
+  <div class="container footer-content">
+    <p>&copy; 2025 Smart Grocery Planner. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="grocery.html">Grocery</a></li>
+      <li><a href="budget.html">Budget</a></li>
+      <li><a href="mealplanner.html">Meal Planner</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

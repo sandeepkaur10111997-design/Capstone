@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grocery Planner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo"><img src="assests/logo.jpg" alt="Smart Grocery Logo" class="logo-img" />Smart Grocery Planner</div>
+      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="grocery.html"class="active">Grocery</a></li>
+        <li><a href="budget.html">Budget</a></li>
+        <li><a href="mealplanner.html">Meal Planner</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Section -->
+  <main class="container">
+    <section class="form-section">
+      <h2>Add Grocery Item</h2>
+      <form id="grocery-form">
+        <div class="form-group">
+          <label for="name">Product Name:</label>
+          <input type="text" id="name" required minlength="2" />
+        </div>
+
+        <div class="form-group">
+          <label for="brand">Brand Name:</label>
+          <input type="text" id="brand" required minlength="2" />
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" required min="1" />
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price ($):</label>
+          <input type="number" id="price" required step="0.01" min="0.01" />
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <input type="text" id="category" required />
+        </div>
+
+        <div class="form-group">
+          <label for="expiry">Expiry Date:</label>
+          <input type="date" id="expiry" required />
+        </div>
+
+        <button type="submit" class="submit-btn">Add Item</button>
+      </form>
+
+      <div id="message" class="status-message"></div>
+    </section>
+
+    <section class="table-section">
+      <h3>Grocery List</h3>
+      <table id="grocery-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Expiry Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>&copy; 2025 Smart Grocery Planner. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="grocery.html">Grocery</a></li>
+        <li><a href="budget.html">Budget</a></li>
+        <li><a href="mealplanner.html">Meal Planner</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Mobile Nav Script -->
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("show");
+    }
+
+    // Optional: Validate expiry date
+    document.getElementById("grocery-form").addEventListener("submit", function (e) {
+      const expiryInput = document.getElementById("expiry").value;
+      const expiryDate = new Date(expiryInput);
+      const today = new Date();
+
+      if (expiryDate <= today) {
+        e.preventDefault();
+        document.getElementById("message").innerText = "❌ Expiry date must be in the future.";
+        document.getElementById("message").style.color = "red";
+      }
+    });
+  </script>
+
+  <script src="grocery.js"></script>
+</body>
+</html>
