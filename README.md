@@ -88,20 +88,20 @@ Server runs at: http://localhost:5000
 Open frontend/index.html in your browser, or serve it using a static hosting service.
 
 🔌 API Endpoints
-Grocery Routes
-Method      |   Endpoint	     |   Description
-GET	          /api/groceries	  Fetch all groceries
-POST	        /api/groceries	  Add a new grocery item
-
-Budget Routes
-Method	    |   Endpoint	     |   Description
-GET	          /api/budget	       Get budget info
-POST	        /api/budget	       Set/update budget
-
-Meal Plan Routes
-Method	    |   Endpoint	     |   Description
-GET	          /api/meals	       Fetch all meal plans
-POST	        /api/meals	       Add a new meal plan
+Grocery Routes<br>
+Method      |   Endpoint	     |   Description<br>
+GET	          /api/groceries	  Fetch all groceries<br>
+POST	        /api/groceries	  Add a new grocery item<br>
+<br>
+Budget Routes<br>
+Method	    |   Endpoint	     |   Description<br>
+GET	          /api/budget	       Get budget info<br>
+POST	        /api/budget	       Set/update budget<br>
+<br>
+Meal Plan Routes<br>
+Method	    |   Endpoint	     |   Description<br>
+GET	          /api/meals	       Fetch all meal plans<br>
+POST	        /api/meals	       Add a new meal plan<br>
 
 
 📸 Screenshots
@@ -118,4 +118,5 @@ AI-powered meal recommendations
 
 📜 License
 This project is licensed under the MIT License.
+
 
