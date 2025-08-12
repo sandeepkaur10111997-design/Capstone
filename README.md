@@ -89,15 +89,15 @@ Open frontend/index.html in your browser, or serve it using a static hosting ser
 
 🔌 API Endpoints
 Grocery Routes<br>
-Method      |   Endpoint	     |   Description<br>
+
 GET	          /api/groceries	  Fetch all groceries<br>
 POST	        /api/groceries	  Add a new grocery item<br>
-<br>
+<hr>
 Budget Routes<br>
 Method	    |   Endpoint	     |   Description<br>
 GET	          /api/budget	       Get budget info<br>
 POST	        /api/budget	       Set/update budget<br>
-<br>
+<hr>
 Meal Plan Routes<br>
 Method	    |   Endpoint	     |   Description<br>
 GET	          /api/meals	       Fetch all meal plans<br>
@@ -118,5 +118,6 @@ AI-powered meal recommendations
 
 📜 License
 This project is licensed under the MIT License.
+
 
 
