@@ -87,7 +87,7 @@ Server runs at: http://localhost:5000
 5️⃣ Access the Frontend
 Open frontend/index.html in your browser, or serve it using a static hosting service.
 
-🔌 API Endpoints
+🔌 API Endpoints<br>
 Grocery Routes<br>
 
 GET	          /api/groceries	  Fetch all groceries<br>
@@ -118,6 +118,7 @@ AI-powered meal recommendations
 
 📜 License
 This project is licensed under the MIT License.
+
 
 
 
