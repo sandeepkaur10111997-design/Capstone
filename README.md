@@ -35,27 +35,27 @@ It’s designed to make grocery shopping more organized, budget-friendly, and ef
 
 ## 📂 Folder Structure
 
-├── backend/
-│ ├── server.js # Main server file
-│ ├── GroceryItem.js # Grocery Mongoose model
-│ ├── Budget.js # Budget Mongoose model
-│ ├── mealplan.js # Meal Plan Mongoose model
-│ ├── budgetroutes.js # Routes for budget endpoints
-│ ├── mealroutes.js # Routes for meal endpoints
-│ ├── package.json
-| ├── package-lock.json
-|
-├── frontend/
-│ ├── index.html # Landing page
-│ ├── grocery.html # Grocery management page
-│ ├── budget.html # Budget tracking page
-│ ├── mealplanner.html # Meal planning page
-│ ├── grocery.js # Grocery page script
-│ ├── script.js # General scripts
-│ ├── style.css # Main styles
-│ └── assets/ # Images and media
-│
-└── README.md
+├── backend/<br>
+│ ├── server.js # Main server file<br>
+│ ├── GroceryItem.js # Grocery Mongoose model<br>
+│ ├── Budget.js # Budget Mongoose model<br>
+│ ├── mealplan.js # Meal Plan Mongoose model<br>
+│ ├── budgetroutes.js # Routes for budget endpoints<br>
+│ ├── mealroutes.js # Routes for meal endpoints<br>
+│ ├── package.json<br>
+| ├── package-lock.json<br>
+|<br>
+├── frontend/<br>
+│ ├── index.html # Landing page<br>
+│ ├── grocery.html # Grocery management page<br>
+│ ├── budget.html # Budget tracking page<br>
+│ ├── mealplanner.html # Meal planning page<br>
+│ ├── grocery.js # Grocery page script<br>
+│ ├── script.js # General scripts<br>
+│ ├── style.css # Main styles<br>
+│ └── assets/ # Images and media<br>
+│<br>
+└── README.md<br>
 
 
 ---
@@ -118,3 +118,4 @@ AI-powered meal recommendations
 
 📜 License
 This project is licensed under the MIT License.
+
