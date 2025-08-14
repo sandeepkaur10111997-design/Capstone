@@ -99,6 +99,7 @@
 
   <!-- JavaScript -->
   <script>
+    const API_BASE = 'https://capstone-backend-hl36.onrender.com';
     function toggleMenu() {
       const navLinks = document.getElementById("navLinks");
       navLinks.classList.toggle("show");
@@ -155,7 +156,7 @@
       }
 
       try {
-        const response = await fetch("http://localhost:5000/api/budget", {
+        const response = await fetch(`${API_BASE}/api/budget`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ totalBudget, month, year })
@@ -191,7 +192,7 @@
       }
 
       try {
-        const response = await fetch("http://localhost:5000/api/budget/spend", {
+        const response = await fetch(`${API_BASE}/api/budget/spend`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ amount })
@@ -219,7 +220,7 @@
       const display = document.getElementById("budget-display");
 
       try {
-        const response = await fetch("http://localhost:5000/api/budget");
+        const response = await fetch(`${API_BASE}/api/budget`);
 
         if (response.ok) {
           const data = await response.json();
@@ -250,3 +251,4 @@
 
 </body>
 </html>
+
