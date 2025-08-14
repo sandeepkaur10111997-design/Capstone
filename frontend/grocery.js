@@ -2,11 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("grocery-form");
   const messageDiv = document.getElementById("message");
   const tableBody = document.querySelector("#grocery-table tbody");
+  const API_BASE = 'https://capstone-backend-hl36.onrender.com';
 
   // Load existing grocery items on page load
   async function loadGroceries() {
     try {
-      const res = await fetch("http://localhost:5000/api/groceries");
+      const res = await fetch(`${API_BASE}/api/groceries`);
       const data = await res.json();
       tableBody.innerHTML = "";
       data.forEach((item) => {
@@ -92,3 +93,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load groceries when the page loads
   loadGroceries();
 });
+
