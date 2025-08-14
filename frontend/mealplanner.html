@@ -206,6 +206,7 @@
 </main>
 
   <script>
+  const API_BASE = 'https://capstone-backend-hl36.onrender.com';
   function toggleMenu() {
       const navLinks = document.getElementById("navLinks");
       navLinks.classList.toggle("show");
@@ -264,7 +265,7 @@
     saveButton.disabled = true;
     saveButton.textContent = "Saving...";
 
-    fetch("http://localhost:5000/api/meals", {
+    fetch(`${API_BASE}/api/meals`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(meals)
@@ -288,7 +289,7 @@
 
   // Fetch and display saved meal plans
   function loadSavedMeals() {
-    fetch("http://localhost:5000/api/meals")
+    fetch(`${API_BASE}/api/meals`)
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById("savedMeals");
@@ -336,3 +337,4 @@
 
 </body>
 </html>
+
