@@ -31,6 +31,10 @@ It’s designed to make grocery shopping more organized, budget-friendly, and ef
 - dotenv for environment variable management
 - CORS for cross-origin requests
 
+**Deployment**
+- Frontend - Vercel
+- Backend - Render
+  
 ---
 
 ## 📂 Folder Structure
@@ -118,6 +122,7 @@ AI-powered meal recommendations
 
 📜 License
 This project is licensed under the MIT License.
+
 
 
 
