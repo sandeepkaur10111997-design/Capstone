@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = { name, brand, quantity, price, category, expiryDate };
 
     try {
-      const res = await fetch("http://localhost:5000/api/groceries", {
+      const res = await fetch(`${API_BASE}/api/groceries`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -93,4 +93,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load groceries when the page loads
   loadGroceries();
 });
+
 
