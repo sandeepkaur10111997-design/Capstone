@@ -224,7 +224,7 @@
     });
 
     // Fetch all meals and populate the form
-    fetch("http://localhost:5000/api/meals")
+    fetch(`${API_BASE}/api/meals`)
       .then(res => res.json())
       .then(data => {
         data.forEach(meal => {
@@ -337,4 +337,5 @@
 
 </body>
 </html>
+
 
