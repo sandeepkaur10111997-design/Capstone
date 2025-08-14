@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Budget = require('./Budget');
+const API_BASE = 'https://capstone-backend-hl36.onrender.com';
 
 // POST: Set/Update monthly budget
 router.post('/', async (req, res) => {
@@ -169,3 +170,4 @@ router.delete('/:year/:month', async (req, res) => {
 });
 
 module.exports = router;
+
