@@ -1,97 +1,190 @@
+// frontend/grocery.js
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("grocery-form");
   const messageDiv = document.getElementById("message");
   const tableBody = document.querySelector("#grocery-table tbody");
-  const API_BASE = 'https://capstone-backend-hl36.onrender.com';
 
-  // Load existing grocery items on page load
+  // Ensure table has an Actions header (safe if already present)
+  const thead = document.querySelector("#grocery-table thead tr");
+  if (thead && ![...thead.children].some(th => th.textContent.trim().toLowerCase() === "actions")) {
+    const th = document.createElement("th");
+    th.textContent = "Actions";
+    thead.appendChild(th);
+  }
+
+  // Helpers
+  const fmtMoney = (n) => `$${Number(n || 0).toFixed(2)}`;
+  const iso = (d) => d ? new Date(d).toISOString().slice(0,10) : "";
+
   async function loadGroceries() {
     try {
-      const res = await fetch(`${API_BASE}/api/groceries`);
+      const res = await fetch("/api/groceries");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       tableBody.innerHTML = "";
-      data.forEach((item) => {
-        const row = `
-          <tr>
-            <td data-label="Name">${item.name}</td>
-            <td data-label="Brand">${item.brand || "-"}</td>
-            <td data-label="Quantity">${item.quantity}</td>
-            <td data-label="Price">$${item.price.toFixed(2)}</td>
-            <td data-label="Category">${item.category}</td>
-            <td data-label="Expiry Date">${item.expiryDate ? new Date(item.expiryDate).toLocaleDateString() : "—"}</td>
-          </tr>`;
-        tableBody.innerHTML += row;
-      });
+      data.forEach(addRow);
     } catch (err) {
-      console.error("Error loading groceries:", err);
-      messageDiv.innerText = "Failed to load items.";
-      messageDiv.style.color = "red";
+      console.error(err);
+      tableBody.innerHTML = '<tr><td colspan="7">Failed to load groceries.</td></tr>';
     }
   }
 
-  // Handle form submission
-  form.addEventListener("submit", async function (e) {
+  function addRow(item) {
+    const tr = document.createElement("tr");
+    tr.dataset.id = item._id;
+    tr.dataset.expiry = item.expiryDate || ""; // keep ISO for edit mode
+    tr.innerHTML = `
+      <td data-label="Name">${item.name || "N/A"}</td>
+      <td data-label="Brand">${item.brand || "-"}</td>
+      <td data-label="Quantity">${item.quantity ?? 0}</td>
+      <td data-label="Price">${fmtMoney(item.price)}</td>
+      <td data-label="Category">${item.category || "N/A"}</td>
+      <td data-label="Expiry Date">${item.expiryDate ? new Date(item.expiryDate).toLocaleDateString() : "—"}</td>
+      <td data-label="Actions">
+        <button class="btn btn-edit">Edit</button>
+        <button class="btn btn-delete">Delete</button>
+      </td>
+    `;
+    tableBody.appendChild(tr);
+  }
+
+  // Add new item
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const brand = document.getElementById("brand").value.trim();
-    const quantity = parseInt(document.getElementById("quantity").value);
-    const price = parseFloat(document.getElementById("price").value);
-    const category = document.getElementById("category").value.trim();
-    const expiryDate = document.getElementById("expiry").value;
-
-    const expiry = new Date(expiryDate);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // Normalize for date-only comparison
-
-    if (!name || !brand || !category || quantity <= 0 || price <= 0 || !expiryDate || expiry <= today) {
-      messageDiv.innerText = "Please fill in all fields correctly. Expiry date must be a future date.";
-      messageDiv.style.color = "red";
-      return;
-    }
-
-    const data = { name, brand, quantity, price, category, expiryDate };
-
+    const item = {
+      name: document.getElementById("name").value.trim(),
+      brand: document.getElementById("brand").value.trim(),
+      quantity: Number(document.getElementById("quantity").value || 0),
+      price: Number(document.getElementById("price").value || 0),
+      category: document.getElementById("category").value.trim(),
+      expiryDate: document.getElementById("expiry").value
+    };
     try {
-      const res = await fetch(`${API_BASE}/api/groceries`, {
+      const res = await fetch("/api/groceries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(item)
       });
-
-      if (res.ok) {
-        const savedItem = await res.json();
-        messageDiv.innerText = "✅ Item added successfully!";
-        messageDiv.style.color = "green";
-        form.reset();
-        addGroceryRow(savedItem);
-      } else {
-        messageDiv.innerText = "❌ Failed to add item.";
-        messageDiv.style.color = "red";
-      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const payload = await res.json();
+      addRow(payload.item || item);
+      messageDiv.textContent = payload?.budgetUpdate?.message || "✅ Item added!";
+      messageDiv.style.color = "green";
+      form.reset();
     } catch (err) {
-      console.error("Server error:", err);
-      messageDiv.innerText = "❌ Server error. Please try again.";
+      console.error(err);
+      messageDiv.textContent = "❌ Failed to add item.";
       messageDiv.style.color = "red";
     }
   });
 
-  // Function to append a new row to the table
-  function addGroceryRow(item) {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td data-label="Name">${item.name}</td>
-      <td data-label="Brand">${item.brand || "-"}</td>
-      <td data-label="Quantity">${item.quantity}</td>
-      <td data-label="Price">$${item.price.toFixed(2)}</td>
-      <td data-label="Category">${item.category}</td>
-      <td data-label="Expiry Date">${item.expiryDate ? new Date(item.expiryDate).toLocaleDateString() : "—"}</td>
-    `;
-    tableBody.appendChild(row);
-  }
+  // Row-level actions (edit/delete/save/cancel) via event delegation
+  tableBody.addEventListener("click", async (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const tr = btn.closest("tr");
+    const id = tr?.dataset.id;
 
-  // Load groceries when the page loads
+    // DELETE
+    if (btn.classList.contains("btn-delete")) {
+      if (!confirm("Delete this item?")) return;
+      try {
+        const res = await fetch(`/api/groceries/${id}`, { method: "DELETE" });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+        tr.remove();
+        messageDiv.textContent = data?.budgetUpdate?.message || "🗑️ Item deleted.";
+        messageDiv.style.color = "green";
+      } catch (err) {
+        console.error(err);
+        messageDiv.textContent = err.message || "Failed to delete.";
+        messageDiv.style.color = "red";
+      }
+      return;
+    }
+
+    // ENTER EDIT MODE
+    if (btn.classList.contains("btn-edit")) {
+      if (tr.dataset.mode === "edit") return; // already editing
+
+      const [nameCell, brandCell, qtyCell, priceCell, categoryCell, expiryCell, actionCell] = tr.children;
+      const current = {
+        name: nameCell.textContent.trim(),
+        brand: brandCell.textContent.trim() === "-" ? "" : brandCell.textContent.trim(),
+        quantity: Number(qtyCell.textContent.trim() || 0),
+        price: Number((priceCell.textContent.trim() || "$0").replace("$", "")),
+        category: categoryCell.textContent.trim() === "N/A" ? "" : categoryCell.textContent.trim(),
+        expiryDate: tr.dataset.expiry ? iso(tr.dataset.expiry) : ""
+      };
+      tr.dataset.mode = "edit";
+      nameCell.innerHTML     = `<input type="text" value="${current.name}">`;
+      brandCell.innerHTML    = `<input type="text" value="${current.brand}">`;
+      qtyCell.innerHTML      = `<input type="number" min="1" step="1" value="${current.quantity}">`;
+      priceCell.innerHTML    = `<input type="number" min="0.01" step="0.01" value="${current.price}">`;
+      categoryCell.innerHTML = `<input type="text" value="${current.category}">`;
+      expiryCell.innerHTML   = `<input type="date" value="${current.expiryDate}">`;
+      actionCell.innerHTML   = `
+        <button class="btn btn-save">Save</button>
+        <button class="btn btn-cancel">Cancel</button>
+      `;
+      return;
+    }
+
+    // SAVE EDITS
+    if (btn.classList.contains("btn-save")) {
+      const [nameCell, brandCell, qtyCell, priceCell, categoryCell, expiryCell, actionCell] = tr.children;
+      const payload = {
+        name: nameCell.querySelector("input").value.trim(),
+        brand: brandCell.querySelector("input").value.trim(),
+        quantity: Number(qtyCell.querySelector("input").value || 0),
+        price: Number(priceCell.querySelector("input").value || 0),
+        category: categoryCell.querySelector("input").value.trim(),
+        expiryDate: expiryCell.querySelector("input").value
+      };
+
+      try {
+        const res = await fetch(`/api/groceries/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+        const item = data.item || payload;
+
+        // Re-render the row (view mode)
+        tr.dataset.mode = "";
+        tr.dataset.expiry = item.expiryDate || "";
+        tr.innerHTML = `
+          <td data-label="Name">${item.name || "N/A"}</td>
+          <td data-label="Brand">${item.brand || "-"}</td>
+          <td data-label="Quantity">${item.quantity ?? 0}</td>
+          <td data-label="Price">${fmtMoney(item.price)}</td>
+          <td data-label="Category">${item.category || "N/A"}</td>
+          <td data-label="Expiry Date">${item.expiryDate ? new Date(item.expiryDate).toLocaleDateString() : "—"}</td>
+          <td data-label="Actions">
+            <button class="btn btn-edit">Edit</button>
+            <button class="btn btn-delete">Delete</button>
+          </td>
+        `;
+        messageDiv.textContent = data?.budgetUpdate?.message || "✅ Item updated.";
+        messageDiv.style.color = "green";
+      } catch (err) {
+        console.error(err);
+        messageDiv.textContent = err.message || "Failed to save changes.";
+        messageDiv.style.color = "red";
+      }
+      return;
+    }
+
+    // CANCEL EDIT
+    if (btn.classList.contains("btn-cancel")) {
+      // Reload list for simplicity (ensures we show latest from server)
+      await loadGroceries();
+      return;
+    }
+  });
+
+  // Initial load
   loadGroceries();
 });
-
-
