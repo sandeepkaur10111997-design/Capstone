@@ -1,3 +1,5 @@
+const API_BASE = 'https://capstone-backend-hl36.onrender.com';
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("grocery-form");
   const messageDiv = document.getElementById("message");
@@ -92,3 +94,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load groceries when the page loads
   loadGroceries();
 });
+
