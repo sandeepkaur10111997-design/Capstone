@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "../frontend")));
 mongoose
   .connect(
     process.env.MONGO_URI ||
-      "mongodb+srv://kshahrukh31:Develop_fullstack@cluster0.1uy58tc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+      "mongodb+srv://capstone123:capstone123@cluster0.2y2ujpq.mongodb.net/smartgrocery",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -59,4 +59,5 @@ app.use('/api/budget', budgetRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
+
 
