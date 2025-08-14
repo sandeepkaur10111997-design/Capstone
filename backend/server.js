@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve frontend static files
-app.use(express.static(path.join(__dirname, "../frontend")));
+//app.use(express.static(path.join(__dirname, "../frontend")));
 
 // MongoDB connection
 mongoose
@@ -24,6 +24,12 @@ mongoose
   )
   .then(() => console.log(" MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
+
+
+app.get("/health", (req, res) => {
+  res.send("ok");
+});
+
 
 // Grocery routes
 app.post("/api/groceries", async (req, res) => {
@@ -46,9 +52,9 @@ app.get("/api/groceries", async (req, res) => {
 });
 
 // Root route
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
-});
+//app.get("/", (req, res) => {
+//  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+//});
 
 const mealRoutes = require('./mealroutes');
 app.use('/api/meals', mealRoutes);
@@ -59,6 +65,7 @@ app.use('/api/budget', budgetRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => console.log(` Server running on port ${PORT}`));
+
 
 
 
